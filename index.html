@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+
     
     <style>
         body {
@@ -180,14 +181,18 @@
                     </p>
                 </div>
 
-                <!-- Spidey Character Avatar (슈트는 그리지 않고 assets/images의 슈트 이미지를 교체하는 방식) -->
-                <div onclick="spideyTouchAction()" class="cursor-pointer group relative">
-                    <div class="w-32 h-32 bg-slate-900 border-4 border-black rounded-full flex items-center justify-center p-2 shadow-2xl transition transform group-hover:scale-105 overflow-hidden">
-                        <img id="spidey-suit-image" src="assets/images/suit-classic.png" alt="클래식 슈트" class="w-28 h-28 object-contain select-none pointer-events-none" draggable="false">
-                    </div>
-                </div>
-            </div>
-
+                <!-- Spidey Character Avatar -->
+<div onclick="spideyTouchAction()" class="cursor-pointer group relative">
+    <!-- 원형 컨테이너: overflow-hidden은 그대로 유지 -->
+    <div class="w-32 h-32 bg-slate-900 border-4 border-black rounded-full flex items-center justify-center p-2 shadow-2xl transition transform group-hover:scale-100 overflow-hidden">
+        <!-- 이미지: object-cover, object-position, scale 클래스 추가 및 수정 -->
+        <img id="spidey-suit-image" 
+             src="assets/images/suit-classic.png" 
+             alt="클래식 슈트" 
+             class="w-full h-full object-cover object-[center_0%] scale-[1.3] select-none pointer-events-none" 
+             draggable="false">
+    </div>
+</div>
             <!-- Villain Boss Target Card -->
             <div id="villain-card" class="bg-slate-800 border-4 border-black rounded-3xl p-4 comic-box text-white relative overflow-hidden">
                 <!-- Floating Web Hit Target Overlay -->
@@ -717,20 +722,39 @@
                 { id: 'bg-symbiote', name: '심비오트 공간', cost: 100, emoji: '🕷️', style: { bg: '#020617', dot: '#334155' } }
             ],
             webType: [
-                { id: 'web-classic', name: '클래식 웹', cost: 0, color: '#facc15', strand: '#ffffff', desc: '기본 노란 웹 · 표준 굵기', effect: 'classic', size: 1.0, sound: 'web_classic.mp3' },
-                { id: 'web-blue', name: '아이언 스파이더 웹', cost: 35, color: '#38bdf8', strand: '#bae6fd', desc: '푸른 전기 웹 · 지그재그 번개 이펙트', effect: 'electric', size: 1.15, sound: 'web_blue.mp3' },
+                { id: 'web-classic', name: '클래식 웹', cost: 0, color: '#FFFFFFFF', strand: '#6B6B6BFF', desc: '기본 노란 웹 · 표준 굵기', effect: 'classic', size: 1.0, sound: 'web_classic.mp3' },
+                { id: 'web-electric', name: '일렉트릭 웹', cost: 35, color: '#38bdf8', strand: '#bae6fd', desc: '푸른 전기 웹 · 지그재그 번개 이펙트', effect: 'electric', size: 1.15, sound: 'web_electric.mp3' },
                 { id: 'web-venom', name: '베놈 웹', cost: 65, color: '#a855f7', strand: '#c4b5fd', desc: '검보라 심비오트 웹 · 굵고 끈적한 촉수 이펙트', effect: 'symbiote', size: 1.5, sound: 'web_venom.mp3' },
                 { id: 'web-fire', name: '스타크 특수 웹', cost: 90, color: '#f97316', strand: '#fde68a', desc: '불꽃 웹 · 불티 파티클 이펙트', effect: 'fire', size: 1.35, sound: 'web_fire.mp3' },
-                { id: 'web-strong', name: '강력 웹', cost: 90, color: '#FFFFFFFF', strand: '#6B6B6BFF', desc: '강력한 거대 웹', effect: 'electric', size: 2.5, sound: 'web_strong.mp3' },
-                { id: 'web-superstrong', name: '초강력 웹', cost: 120, color: '#FFFFFFFF', strand: '#6B6B6BFF', desc: '초강력한 거대 웹', effect: 'electric', size: 5, sound: 'web_superstrong.mp3' },
-                { id: 'web-realsuperstrong', name: '짱 초강력 웹', cost: 150, color: '#FFFFFFFF', strand: '#6B6B6BFF', desc: '매우 짱 짱 초강력한 거대 웹', effect: 'electric', size: 10, sound: 'web_realsuperstrong.mp3' }
+                { id: 'web-impact', name: '임펙트 웹', cost: 90, color: '#FFFFFFFF', strand: '#6B6B6BFF', desc: '강력한 임펙트 웹', effect: 'impact', size: 1.5, sound: 'web_impact.mp3' },
+                { id: 'web-spiderdrone', name: '스파이더 드론', cost: 150, color: '#FF0000FF', strand: '#050505FF', desc: '날라다니는 드론', effect: 'spiderdrone', size: 2, sound: 'web_venom.mp3' },
+                { id: 'web-bomb', name: '웹 봄', cost: 150, color: '#300D0DFF', strand: '#FF6E6EFF', desc: '터지는 웹 봄', effect: 'bomb', size: 1.6, sound: 'web_fire.mp3' },
+                { id: 'web-tripmine', name: '트립마인 웹', cost: 150, color: '#DB35B2FF', strand: '#360000FF', desc: '끌어당겨 감는 트립마인 웹', effect: 'tripmine', size: 1.5, sound: 'web_impact.mp3' },
+                { id: 'web-shock', name: '충격파', cost: 200, color: '#2FD8DEFF', strand: '#CCFDFFFF', desc: '충격파를 일으켜 공격', effect: 'shock', size: 1, sound: 'web_electric.mp3' },
+                { id: 'web-levitate', name: '공중부양', cost: 250, color: '#38A5FFFF', strand: '#99FFC9FF', desc: '적군을 공중부양 시키는 공격', effect: 'levitate', size: 3, sound: 'web_impact.mp3' }
             ],
             
             suit: [
                 { id: 'suit-classic', name: '클래식 슈트', cost: 0, image: 'suit-classic.png' },
-                { id: 'suit-black', name: '심비오트 블랙 슈트', cost: 80, image: 'suit-black.png' },
-                { id: 'suit-stark', name: '아이언 스파이더 슈트', cost: 120, image: 'suit-stark.png' },
-                { id: 'suit-2099', name: '스파이더맨 2099 슈트', cost: 150, image: 'suit-2099.png' }
+                { id: 'suit-new-classic', name: '진화 클래식 슈트', cost: 50, image: 'suit-new-classic.png' },
+                { id: 'suit-damaged-classic', name: '파손 클래식 슈트', cost: 35, image: 'suit-damaged-classic.png' },
+                { id: 'suit-2099-black', name: '2099 블랙 슈트', cost: 100, image: 'suit-2099-black.png' },
+                { id: 'suit-spy', name: '느와르 슈트', cost: 80, image: 'suit-spy.png' },
+                { id: 'suit-scarlet', name: '스칼렛 슈트', cost: 85, image: 'suit-scarlet.png' },
+                { id: 'suit-armorMKII', name: '아머 MK II 슈트', cost: 40, image: 'suit-armorMKII.png' },
+                { id: 'suit-secret-war', name: '시크릿 워 슈트', cost: 70, image: 'suit-secret-war.png' },
+                { id: 'suit-stark', name: '스타크 슈트', cost: 50, image: 'suit-stark.png' },
+                { id: 'suit-negative', name: '네거티브 슈트', cost: 35, image: 'suit-negative.png' },
+                { id: 'suit-noelectric', name: '절연 슈트', cost: 50, image: 'suit-noelectric.png' },
+                { id: 'suit-spiderpunk', name: '스파이더 펑크 슈트', cost: 85, image: 'suit-spiderpunk.png' },
+                { id: 'suit-wrestling', name: '레슬링 슈트', cost: 80, image: 'suit-wrestling.png' },
+                { id: 'suit-fearitself', name: '피어 잇셀프 슈트', cost: 60, image: 'suit-fearitself.png' },
+                { id: 'suit-stealthbigtime', name: '스텔스 빅타임 슈트', cost: 50, image: 'suit-stealthbigtime.png' },
+                { id: 'suit-armorMKIII', name: '아머 MK III 슈트', cost: 60, image: 'suit-armorMKIII.png' },
+                { id: 'suit-ironspider', name: '아이언 스파이더 슈트', cost: 70, image: 'suit-ironspider.png' },
+                { id: 'suit-velocity', name: '벨로시티 슈트', cost: 65, image: 'suit-velocity.png' },
+                { id: 'suit-armorMKIV', name: '아머 MK IV 슈트', cost: 80, image: 'suit-armorMKIV.png' },
+                { id: 'suit-spiritspider', name: '고스트 스파이더 슈트', cost: 65, image: 'suit-spiritspider.png' }
             ]
         };
 
@@ -1555,6 +1579,18 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 switch (webCfg.effect) {
+                    case 'impact':
+                        drawImpactWeb(ctx, startX, startY, curX, curY, webCfg, sizeMul);
+                    case 'bomb':
+                        drawBomb(ctx, startX, startY, curX, curY, webCfg, sizeMul);
+                    case 'levitate':
+                        drawLevitate(ctx, startX, startY, curX, curY, webCfg, sizeMul);
+                    case 'tripmine':
+                        drawTripMine(ctx, startX, startY, curX, curY, webCfg, sizeMul);
+                    case 'shock':
+                        drawShock(ctx, startX, startY, curX, curY, webCfg, sizeMul);
+                    case 'spiderdrone':
+                        drawSpiderDrone(ctx, startX, startY, curX, curY, webCfg, sizeMul);
                     case 'electric':
                         drawElectricWeb(ctx, startX, startY, curX, curY, webCfg, sizeMul);
                         break;
@@ -1685,6 +1721,489 @@
             ctx.fill();
         }
 
+        // 임팩트 웹: 겁나 두꺼운 주선 + 타격 충격파 이펙트
+function drawImpactWeb(ctx, sx, sy, cx, cy, cfg, sizeMul) {
+    ctx.save();
+
+    // 1. 외각 발광 패스 (Glow Layer)
+    ctx.beginPath();
+    ctx.strokeStyle = cfg.head;
+    ctx.lineWidth = 18 * sizeMul;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 20 * sizeMul;
+    ctx.globalAlpha = 0.4;
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(cx, cy);
+    ctx.stroke();
+
+    // 2. 묵직하고 두꺼운 코어 주선 (Main Core Line)
+    ctx.beginPath();
+    ctx.strokeStyle = cfg.main;
+    ctx.lineWidth = 10 * sizeMul;
+    ctx.lineCap = 'round';
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1.0;
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(cx, cy);
+    ctx.stroke();
+
+    // 3. 중앙 하이라이트 와이어 (Inner Bright Line)
+    ctx.beginPath();
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 3 * sizeMul;
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(cx, cy);
+    ctx.stroke();
+
+    // 4. 타격 지점 충격 파편 (Impact Debris & Sparks)
+    const sparkCount = 8;
+    for (let i = 0; i < sparkCount; i++) {
+        const angle = (Math.PI * 2 / sparkCount) * i + (Math.random() * 0.2);
+        const dist = (15 + Math.random() * 20) * sizeMul;
+        const ex = cx + Math.cos(angle) * dist;
+        const ey = cy + Math.sin(angle) * dist;
+
+        ctx.beginPath();
+        ctx.strokeStyle = Math.random() > 0.4 ? cfg.head : '#FFFFFF';
+        ctx.lineWidth = (2 + Math.random() * 2) * sizeMul;
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+    }
+
+    // 5. 충격 파동 링 (Impact Wave Ring)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 14 * sizeMul, 0, Math.PI * 2);
+    ctx.strokeStyle = cfg.head;
+    ctx.lineWidth = 3 * sizeMul;
+    ctx.globalAlpha = 0.8;
+    ctx.stroke();
+
+    // 6. 중앙 헤드 노드
+    ctx.beginPath();
+    ctx.arc(cx, cy, 8 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+
+    ctx.restore();
+}
+
+// =========================================================
+// 1. Spider Drone (날아다니다 단발 사격 후 사라지는 드론)
+// sx, sy: 드론의 현재 위치
+// cx, cy: 단발 사격의 타겟 위치
+// =========================================================
+function drawSpiderDrone(ctx, sx, sy, cx, cy, cfg, sizeMul) {
+    ctx.save();
+
+    // 드론이 타겟을 향하는 각도 계산
+    const dx = cx - sx;
+    const dy = cy - sy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
+
+    // 1. 단발 사격 레이저/거미줄 빔 (Single Shot Beam)
+    if (dist > 0) {
+        // 빔 외곽 발광
+        ctx.beginPath();
+        ctx.strokeStyle = cfg.head;
+        ctx.lineWidth = 6 * sizeMul;
+        ctx.shadowColor = cfg.head;
+        ctx.shadowBlur = 12 * sizeMul;
+        ctx.globalAlpha = 0.7;
+        ctx.moveTo(sx, sy);
+        ctx.lineTo(cx, cy);
+        ctx.stroke();
+
+        // 빔 코어 라인
+        ctx.beginPath();
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 2 * sizeMul;
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1.0;
+        ctx.moveTo(sx, sy);
+        ctx.lineTo(cx, cy);
+        ctx.stroke();
+        
+        // 타겟 타격 스파크 (Hit Spark)
+        ctx.beginPath();
+        ctx.arc(cx, cy, 6 * sizeMul, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fill();
+    }
+
+    // 캔버스 중심을 드론 위치로 이동 및 회전
+    ctx.translate(sx, sy);
+    ctx.rotate(angle);
+
+    // 2. 비행 추진체 발광 (Thruster Glow)
+    ctx.beginPath();
+    ctx.fillStyle = cfg.head;
+    ctx.globalAlpha = 0.6;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 15 * sizeMul;
+    // 드론 뒷부분에 추진체 이펙트
+    ctx.arc(-12 * sizeMul, 0, 10 * sizeMul, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+
+    // 3. 기계 거미 다리 (Mechanical Legs)
+    ctx.strokeStyle = cfg.main;
+    ctx.lineWidth = 3 * sizeMul;
+    ctx.lineCap = 'round';
+    ctx.shadowBlur = 0;
+    // 위아래로 뻗은 4개의 다리
+    const legAngles = [-0.8, -0.4, 0.4, 0.8]; 
+    for (let a of legAngles) {
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        // 뒤쪽으로 살짝 꺾인 형태의 다리
+        const legLength = 16 * sizeMul;
+        ctx.lineTo(Math.cos(Math.PI + a) * legLength, Math.sin(Math.PI + a) * legLength);
+        ctx.stroke();
+    }
+
+    // 4. 드론 본체 (Drone Core Body)
+    ctx.beginPath();
+    ctx.arc(0, 0, 8 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.main;
+    ctx.fill();
+    ctx.lineWidth = 2 * sizeMul;
+    ctx.strokeStyle = cfg.head;
+    ctx.stroke();
+
+    // 5. 드론의 정면 눈(렌즈) 발광 (Front Lens)
+    ctx.beginPath();
+    ctx.arc(4 * sizeMul, 0, 3 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 10 * sizeMul;
+    ctx.fill();
+
+    ctx.restore();
+}
+
+
+// =========================================================
+// 1. Bomb (강력한 폭발 및 화염 이펙트)
+// sx, sy: 발사/던진 위치
+// cx, cy: 폭발 에피센터 (중심점)
+// =========================================================
+function drawBomb(ctx, sx, sy, cx, cy, cfg, sizeMul) {
+    ctx.save();
+
+    // 1. 발사 궤적 및 연기 흔적 (Launch Trail)
+    ctx.beginPath();
+    ctx.strokeStyle = cfg.main;
+    ctx.lineWidth = 4 * sizeMul;
+    ctx.globalAlpha = 0.25;
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(cx, cy);
+    ctx.stroke();
+
+    // 2. 외부 대형 화염 글로우 (Outer Fireball Glow)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 45 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.head;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 35 * sizeMul;
+    ctx.globalAlpha = 0.35;
+    ctx.fill();
+
+    // 3. 강력한 폭발 충격파 링 (Shockwave Ring)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 32 * sizeMul, 0, Math.PI * 2);
+    ctx.strokeStyle = cfg.head;
+    ctx.lineWidth = 8 * sizeMul;
+    ctx.globalAlpha = 0.7;
+    ctx.shadowBlur = 20 * sizeMul;
+    ctx.stroke();
+
+    // 4. 사방으로 뿜어져 나가는 화염 섬광 파편 (Burst Spikes)
+    ctx.globalAlpha = 1.0;
+    const spikeCount = 14;
+    for (let i = 0; i < spikeCount; i++) {
+        const angle = (Math.PI * 2 / spikeCount) * i + (Math.random() * 0.15);
+        const innerDist = (8 + Math.random() * 8) * sizeMul;
+        const outerDist = (35 + Math.random() * 25) * sizeMul;
+
+        ctx.beginPath();
+        ctx.strokeStyle = i % 2 === 0 ? '#FFFFFF' : cfg.head;
+        ctx.lineWidth = (3 + Math.random() * 3) * sizeMul;
+        ctx.lineCap = 'round';
+        ctx.moveTo(cx + Math.cos(angle) * innerDist, cy + Math.sin(angle) * innerDist);
+        ctx.lineTo(cx + Math.cos(angle) * outerDist, cy + Math.sin(angle) * outerDist);
+        ctx.stroke();
+    }
+
+    // 5. 중앙 고온 폭발 코어 (Superhot Core)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 16 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.main;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 25 * sizeMul;
+    ctx.fill();
+
+    // 6. 하얀색 중심 섬광 (White Center Flash)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 8 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.shadowBlur = 15 * sizeMul;
+    ctx.fill();
+
+    ctx.restore();
+}
+
+// =========================================================
+// 2. Levitate (공중부양 및 상향 기류 효과)
+// cx, cy: 부유 대상의 중심점
+// =========================================================
+function drawLevitate(ctx, sx, sy, cx, cy, cfg, sizeMul) {
+    ctx.save();
+
+    // 1. 수직 상승 에너지를 나타내는 타원형 링 (Levitation Aura Rings)
+    const ringYOffsets = [18, 0, -18];
+    const ringRadii = [26, 20, 14];
+
+    for (let i = 0; i < ringYOffsets.length; i++) {
+        const ry = cy + ringYOffsets[i] * sizeMul;
+        const radius = ringRadii[i] * sizeMul;
+
+        ctx.beginPath();
+        ctx.ellipse(cx, ry, radius, radius * 0.4, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = cfg.head;
+        ctx.lineWidth = 3 * sizeMul;
+        ctx.globalAlpha = 0.6 - i * 0.15;
+        ctx.shadowColor = cfg.head;
+        ctx.shadowBlur = 15 * sizeMul;
+        ctx.stroke();
+    }
+
+    // 2. 상향 상승 기류 스트림 (Upward Energy Streams)
+    const streamCount = 8;
+    for (let i = 0; i < streamCount; i++) {
+        const offsetX = (Math.random() - 0.5) * 40 * sizeMul;
+        const startY = cy + (20 + Math.random() * 10) * sizeMul;
+        const endY = cy - (25 + Math.random() * 25) * sizeMul;
+
+        ctx.beginPath();
+        ctx.strokeStyle = Math.random() > 0.3 ? cfg.main : '#FFFFFF';
+        ctx.lineWidth = (1.5 + Math.random() * 1.5) * sizeMul;
+        ctx.globalAlpha = 0.4 + Math.random() * 0.4;
+        ctx.shadowBlur = 8 * sizeMul;
+
+        ctx.moveTo(cx + offsetX, startY);
+        ctx.lineTo(cx + offsetX, endY);
+        ctx.stroke();
+    }
+
+    // 3. 부유하는 필드 중앙 글로우 (Floating Field Core Glow)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 18 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.head;
+    ctx.globalAlpha = 0.35;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 25 * sizeMul;
+    ctx.fill();
+
+    // 4. 중앙 부유 노드 (Floating Center Spec)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 6 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.globalAlpha = 0.9;
+    ctx.shadowColor = '#FFFFFF';
+    ctx.shadowBlur = 12 * sizeMul;
+    ctx.fill();
+
+    // 5. 공중에 부유하는 에너지 입자 (Floating Particles)
+    const particleCount = 10;
+    for (let i = 0; i < particleCount; i++) {
+        const px = cx + (Math.random() - 0.5) * 50 * sizeMul;
+        const py = cy + (Math.random() - 0.5) * 50 * sizeMul;
+        const pSize = (1 + Math.random() * 2) * sizeMul;
+
+        ctx.beginPath();
+        ctx.arc(px, py, pSize, 0, Math.PI * 2);
+        ctx.fillStyle = cfg.head;
+        ctx.globalAlpha = 0.5 + Math.random() * 0.5;
+        ctx.shadowBlur = 6 * sizeMul;
+        ctx.fill();
+    }
+
+    ctx.restore();
+}
+
+// =========================================================
+// 3. TripMine (설치 및 중심으로 끌어당기는 장치 이펙트)
+// sx, sy: 트랩 마인 설치 위치
+// cx, cy: 대상 및 끌어당기는 자력 중심점
+// =========================================================
+function drawTripMine(ctx, sx, sy, cx, cy, cfg, sizeMul) {
+    ctx.save();
+
+    // 1. 설치된 트랩 마인 본체 (Mine Device at sx, sy)
+    ctx.beginPath();
+    ctx.arc(sx, sy, 7 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.main;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 10 * sizeMul;
+    ctx.fill();
+
+    // 마인 발광 렌즈
+    ctx.beginPath();
+    ctx.arc(sx, sy, 3.5 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.head;
+    ctx.fill();
+
+    // 2. 강한 구속 레이저/와이어 (Tether Beam)
+    ctx.beginPath();
+    ctx.strokeStyle = cfg.head;
+    ctx.lineWidth = 4 * sizeMul;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 15 * sizeMul;
+    ctx.globalAlpha = 0.8;
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(cx, cy);
+    ctx.stroke();
+
+    // 중심 와이어 하이라이트
+    ctx.beginPath();
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 1.5 * sizeMul;
+    ctx.globalAlpha = 1.0;
+    ctx.shadowBlur = 0;
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(cx, cy);
+    ctx.stroke();
+
+    // 3. 내향 흡입 벡터 라인 (Inward Gravitational Pull Lines)
+    const strandCount = 8;
+    for (let i = 0; i < strandCount; i++) {
+        const angle = (Math.PI * 2 / strandCount) * i;
+        const outerDist = (30 + Math.random() * 15) * sizeMul;
+        const innerDist = 5 * sizeMul;
+
+        const ox = cx + Math.cos(angle) * outerDist;
+        const oy = cy + Math.sin(angle) * outerDist;
+
+        ctx.beginPath();
+        ctx.strokeStyle = cfg.main;
+        ctx.lineWidth = 2 * sizeMul;
+        ctx.globalAlpha = 0.7;
+        ctx.shadowColor = cfg.head;
+        ctx.shadowBlur = 8 * sizeMul;
+
+        // 외각에서 중심점(cx, cy)을 향해 좁아지는 선
+        ctx.moveTo(ox, oy);
+        ctx.lineTo(cx + Math.cos(angle) * innerDist, cy + Math.sin(angle) * innerDist);
+        ctx.stroke();
+    }
+
+    // 4. 끌어당기는 수축 자력 링 (Collapsing Gravity Rings)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 22 * sizeMul, 0, Math.PI * 2);
+    ctx.strokeStyle = cfg.head;
+    ctx.lineWidth = 3 * sizeMul;
+    ctx.globalAlpha = 0.5;
+    ctx.setLineDash([4 * sizeMul, 4 * sizeMul]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 12 * sizeMul, 0, Math.PI * 2);
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 2 * sizeMul;
+    ctx.globalAlpha = 0.8;
+    ctx.stroke();
+
+    // 5. 중심 수축 점 (Pull Center Focal Point)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 6 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.head;
+    ctx.shadowColor = cfg.head;
+    ctx.shadowBlur = 20 * sizeMul;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 3 * sizeMul, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+
+    ctx.restore();
+}
+
+// =========================================================
+// 2. Shock (충격파 느낌의 효과)
+// cx, cy: 충격 중심
+// =========================================================
+function drawShock(ctx, sx, sy, cx, cy, cfg, sizeMul) {
+  ctx.save();
+
+  // 1. 발사 궤적 흔적 (Faint Trail)
+  ctx.beginPath();
+  ctx.strokeStyle = cfg.main;
+  ctx.lineWidth = 2 * sizeMul;
+  ctx.globalAlpha = 0.3;
+  ctx.setLineDash([6 * sizeMul, 6 * sizeMul]); // 점선 효과
+  ctx.moveTo(sx, sy);
+  ctx.lineTo(cx, cy);
+  ctx.stroke();
+  ctx.setLineDash([]); // 점선 초기화
+  ctx.globalAlpha = 1.0;
+
+  // 2. 주 충격파 링 (Main Shock Wave Ring)
+  ctx.beginPath();
+  ctx.arc(cx, cy, 40 * sizeMul, 0, Math.PI * 2);
+  ctx.strokeStyle = cfg.head;
+  ctx.lineWidth = 15 * sizeMul;
+  ctx.globalAlpha = 0.5;
+  ctx.shadowColor = cfg.head;
+  ctx.shadowBlur = 30 * sizeMul;
+  ctx.stroke();
+
+  // 얇고 날카로운 내부 충격파
+  ctx.beginPath();
+  ctx.arc(cx, cy, 50 * sizeMul, 0, Math.PI * 2);
+  ctx.strokeStyle = '#FFFFFF';
+  ctx.lineWidth = 3 * sizeMul;
+  ctx.globalAlpha = 0.9;
+  ctx.shadowBlur = 15 * sizeMul;
+  ctx.stroke();
+
+  // 3. 잔여 에너지 및 파편 (Residual Energy & Debris)
+  ctx.globalAlpha = 1.0;
+  const sparkCount = 16;
+  for (let i = 0; i < sparkCount; i++) {
+    const angle = (Math.PI * 2 / sparkCount) * i + (Math.random() * 0.2);
+    // 파편이 중앙에서 떨어져 밖으로 퍼져나감
+    const startDist = (15 + Math.random() * 15) * sizeMul;
+    const endDist = (50 + Math.random() * 35) * sizeMul;
+
+    ctx.beginPath();
+    ctx.strokeStyle = Math.random() > 0.4 ? cfg.head : '#FFFFFF';
+    ctx.lineWidth = (3 + Math.random() * 4) * sizeMul;
+    ctx.moveTo(cx + Math.cos(angle) * startDist, cy + Math.sin(angle) * startDist);
+    ctx.lineTo(cx + Math.cos(angle) * endDist, cy + Math.sin(angle) * endDist);
+    ctx.stroke();
+  }
+
+  // 4. 충격 중심 (Shock Center)
+  ctx.beginPath();
+  ctx.arc(cx, cy, 20 * sizeMul, 0, Math.PI * 2);
+  ctx.fillStyle = cfg.head;
+  ctx.shadowColor = cfg.head;
+  ctx.shadowBlur = 40 * sizeMul;
+  ctx.fill();
+
+  // 하얀색 섬광
+  ctx.beginPath();
+  ctx.arc(cx, cy, 10 * sizeMul, 0, Math.PI * 2);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.shadowBlur = 20 * sizeMul;
+  ctx.fill();
+
+  ctx.restore();
+}
         function showWebImpactVisual(rect, dmg) {
             // Web net overlay on villain
             const webOverlay = document.getElementById('web-overlay');
